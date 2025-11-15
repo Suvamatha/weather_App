@@ -14,7 +14,7 @@ body {
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
   transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -46,20 +46,20 @@ body {
 
 /* Snowflake sizes and animations */
 .snowflake.small {
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   animation-duration: 10s;
 }
 
 .snowflake.medium {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   animation-duration: 15s;
 }
 
 .snowflake.large {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   animation-duration: 20s;
 }
 
@@ -127,20 +127,8 @@ body {
   }
 }
 
-/* Generate random particle positions */
-.particle:nth-child(1) { left: 5%; width: 8px; height: 8px; animation-duration: 25s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 15%; width: 12px; height: 12px; animation-duration: 30s; animation-delay: 3s; }
-.particle:nth-child(3) { left: 25%; width: 6px; height: 6px; animation-duration: 20s; animation-delay: 1s; }
-.particle:nth-child(4) { left: 35%; width: 10px; height: 10px; animation-duration: 35s; animation-delay: 5s; }
-.particle:nth-child(5) { left: 45%; width: 7px; height: 7px; animation-duration: 28s; animation-delay: 2s; }
-.particle:nth-child(6) { left: 55%; width: 14px; height: 14px; animation-duration: 22s; animation-delay: 4s; }
-.particle:nth-child(7) { left: 65%; width: 5px; height: 5px; animation-duration: 32s; animation-delay: 1s; }
-.particle:nth-child(8) { left: 75%; width: 9px; height: 9px; animation-duration: 26s; animation-delay: 6s; }
-.particle:nth-child(9) { left: 85%; width: 11px; height: 11px; animation-duration: 24s; animation-delay: 3s; }
-.particle:nth-child(10) { left: 95%; width: 6px; height: 6px; animation-duration: 29s; animation-delay: 2s; }
-
 /* -------------------------------------------------
-   LOADING SCREEN - IMPROVED
+   LOADING SCREEN - MOBILE FRIENDLY
 ------------------------------------------------- */
 .loading-screen {
   position: fixed;
@@ -151,23 +139,25 @@ body {
   justify-content: center;
   z-index: 9999;
   animation: fadeOut 0.8s ease-out 2.7s forwards;
+  padding: 20px;
 }
 
 .loading-content {
   text-align: center;
   color: white;
+  max-width: 100%;
 }
 
 .weather-loader {
   position: relative;
-  width: 80px;
-  height: 80px;
-  margin-bottom: 30px;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
 }
 
 .sun {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: #ffeb3b;
   border-radius: 50%;
   position: absolute;
@@ -175,14 +165,14 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   animation: sunPulse 2s ease-in-out infinite;
-  box-shadow: 0 0 30px #ffeb3b;
+  box-shadow: 0 0 20px #ffeb3b;
 }
 
 .cloud {
   position: absolute;
-  top: 20px;
-  right: -10px;
-  font-size: 24px;
+  top: 15px;
+  right: -8px;
+  font-size: 18px;
   animation: cloudFloat 3s ease-in-out infinite;
 }
 
@@ -193,11 +183,11 @@ body {
 
 @keyframes cloudFloat {
   0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-20px); }
+  50% { transform: translateX(-15px); }
 }
 
 .welcome-title {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 6vw, 2.8rem); /* Fluid typography */
   font-weight: 900;
   background: linear-gradient(90deg, #fff, #a0e7ff, #fff);
   background-size: 200% auto;
@@ -211,10 +201,11 @@ body {
   border-right: 3px solid white;
   width: 0;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .loading-subtitle {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
   opacity: 0.9;
   margin-top: 8px;
   animation: fadeIn 1.5s ease-out 0.5s forwards;
@@ -223,7 +214,7 @@ body {
 
 @keyframes typingWelcome {
   from { width: 0; }
-  to { width: 20ch; }
+  to { width: min(20ch, 90vw); } /* Responsive width */
 }
 
 @keyframes shimmer {
@@ -240,20 +231,20 @@ body {
 }
 
 /* -------------------------------------------------
-   MAIN APP CONTAINER - IMPROVED READABILITY
+   MAIN APP CONTAINER - ULTRA RESPONSIVE
 ------------------------------------------------- */
 .app-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 420px; /* Reduced from 480px */
-  width: calc(100% - 20px); /* Reduced padding */
-  padding: 24px 20px; /* Reduced padding */
+  max-width: min(420px, 90vw); /* Responsive max-width */
+  width: calc(100% - 20px);
+  padding: clamp(16px, 4vw, 24px) clamp(12px, 3vw, 20px); /* Fluid padding */
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 24px; /* Slightly smaller radius */
+  border-radius: clamp(16px, 4vw, 24px); /* Fluid border radius */
   text-align: center;
   color: #1a1a1a;
   box-shadow: 
@@ -274,28 +265,30 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px; /* Reduced margin */
+  margin-bottom: clamp(16px, 4vw, 24px); /* Fluid margin */
+  gap: 10px;
 }
 
 .title {
-  font-size: 2rem; /* Reduced from 2.4rem */
+  font-size: clamp(1.6rem, 5vw, 2rem); /* Fluid typography */
   font-weight: 800;
   display: flex;
   align-items: center;
-  gap: 10px; /* Reduced gap */
+  gap: clamp(8px, 2vw, 10px); /* Fluid gap */
   color: #1a1a1a;
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   animation: glowPulse 3s ease-in-out infinite alternate;
+  flex: 1;
 }
 
 .title-icon {
-  font-size: 1.8rem; /* Reduced from 2.2rem */
+  font-size: clamp(1.4rem, 4vw, 1.8rem); /* Fluid icon size */
   animation: bounce 2s ease-in-out infinite;
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-4px); }
 }
 
 @keyframes cardEntry {
@@ -319,39 +312,47 @@ body {
 }
 
 /* -------------------------------------------------
-   SEARCH SECTION - IMPROVED CONTRAST
+   SEARCH SECTION - MOBILE OPTIMIZED
 ------------------------------------------------- */
 .search-section {
-  margin-bottom: 20px; /* Reduced margin */
+  margin-bottom: clamp(16px, 4vw, 20px);
 }
 
 .search-form {
   display: flex;
-  gap: 10px; /* Reduced gap */
-  margin-bottom: 16px; /* Reduced margin */
+  flex-direction: column; /* Stack on mobile */
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 480px) {
+  .search-form {
+    flex-direction: row; /* Side by side on larger screens */
+  }
 }
 
 .search-input-wrapper {
   position: relative;
   flex: 1;
+  width: 100%;
 }
 
 .search-input-wrapper .search-icon {
   position: absolute;
-  left: 14px; /* Adjusted position */
+  left: clamp(12px, 3vw, 14px);
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.7;
   color: #1a1a1a;
-  font-size: 0.9rem; /* Smaller icon */
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .input-outline {
   width: 100%;
-  padding: 14px 14px 14px 40px; /* Reduced padding */
-  font-size: 0.9rem; /* Smaller font */
+  padding: clamp(12px, 3vw, 14px) clamp(12px, 3vw, 14px) clamp(12px, 3vw, 14px) clamp(36px, 8vw, 40px);
+  font-size: clamp(0.85rem, 3vw, 0.9rem);
   border: none;
-  border-radius: 18px; /* Slightly smaller radius */
+  border-radius: clamp(14px, 3vw, 18px);
   background: rgba(255,255,255,0.4);
   color: #1a1a1a;
   outline: none;
@@ -362,7 +363,7 @@ body {
 
 .input-outline::placeholder {
   color: rgba(0,0,0,0.6);
-  font-size: 0.9rem; /* Smaller placeholder */
+  font-size: clamp(0.85rem, 3vw, 0.9rem);
 }
 
 .input-outline:focus {
@@ -372,18 +373,26 @@ body {
 }
 
 .btn-outline {
-  padding: 14px 20px; /* Reduced padding */
+  padding: clamp(12px, 3vw, 14px) clamp(16px, 4vw, 20px);
   border: none;
-  border-radius: 18px; /* Slightly smaller radius */
+  border-radius: clamp(14px, 3vw, 18px);
   background: rgba(0,0,0,0.8);
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 100px; /* Reduced min-width */
+  min-width: auto;
+  width: 100%; /* Full width on mobile */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0,0,0,0.3);
-  font-size: 0.9rem; /* Smaller font */
+  font-size: clamp(0.85rem, 3vw, 0.9rem);
+}
+
+@media (min-width: 480px) {
+  .btn-outline {
+    width: auto; /* Auto width on larger screens */
+    min-width: 100px;
+  }
 }
 
 .btn-outline:hover {
@@ -397,8 +406,8 @@ body {
 }
 
 .button-loader {
-  width: 18px; /* Smaller loader */
-  height: 18px;
+  width: clamp(16px, 4vw, 18px);
+  height: clamp(16px, 4vw, 18px);
   border: 2px solid transparent;
   border-top: 2px solid white;
   border-radius: 50%;
@@ -411,38 +420,40 @@ body {
 }
 
 /* -------------------------------------------------
-   SEARCH HISTORY - IMPROVED CONTRAST
+   SEARCH HISTORY - COMPACT MOBILE
 ------------------------------------------------- */
 .search-history {
   text-align: left;
 }
 
 .history-title {
-  font-size: 0.85rem; /* Smaller font */
+  font-size: clamp(0.75rem, 2.5vw, 0.85rem);
   opacity: 0.8;
-  margin-bottom: 6px; /* Reduced margin */
+  margin-bottom: 6px;
   color: #1a1a1a;
   font-weight: 600;
 }
 
 .history-chips {
   display: flex;
-  gap: 6px; /* Reduced gap */
+  gap: 4px;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .history-chip {
-  padding: 5px 12px; /* Reduced padding */
+  padding: clamp(4px, 1.5vw, 5px) clamp(8px, 2.5vw, 12px);
   background: rgba(0,0,0,0.7);
   border: 1px solid rgba(0,0,0,0.3);
-  border-radius: 16px; /* Smaller radius */
+  border-radius: clamp(12px, 2.5vw, 16px);
   color: white;
-  font-size: 0.8rem; /* Smaller font */
+  font-size: clamp(0.7rem, 2.5vw, 0.8rem);
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   border: none;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .history-chip:hover {
@@ -451,13 +462,13 @@ body {
 }
 
 /* -------------------------------------------------
-   WEATHER CARD - COMPACT LAYOUT
+   WEATHER CARD - ULTRA RESPONSIVE
 ------------------------------------------------- */
 .weather-card {
-  margin-top: 20px; /* Reduced margin */
-  padding: 20px; /* Reduced padding */
+  margin-top: clamp(16px, 4vw, 20px);
+  padding: clamp(16px, 4vw, 20px);
   background: rgba(255,255,255,0.3);
-  border-radius: 20px; /* Smaller radius */
+  border-radius: clamp(16px, 4vw, 20px);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255,255,255,0.4);
   animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -466,18 +477,35 @@ body {
 
 .weather-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 16px; /* Reduced margin */
+  flex-direction: column; /* Stack on mobile */
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 480px) {
+  .weather-header {
+    flex-direction: row; /* Side by side on larger screens */
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 
 .location {
-  text-align: left;
+  text-align: center;
   flex: 1;
 }
 
+@media (min-width: 480px) {
+  .location {
+    text-align: left;
+  }
+}
+
 .weather-title {
-  font-size: 1.5rem; /* Reduced from 1.8rem */
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
   font-weight: 700;
   margin-bottom: 4px;
   color: #1a1a1a;
@@ -490,67 +518,72 @@ body {
   text-transform: capitalize;
   color: #1a1a1a;
   font-weight: 500;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .weather-icon {
-  font-size: 3rem; /* Reduced from 4rem */
+  font-size: clamp(2.5rem, 8vw, 3rem);
   animation: float 3s ease-in-out infinite;
-  margin-left: 10px;
 }
 
 .temperature-section {
-  margin: 20px 0; /* Reduced margin */
+  margin: clamp(16px, 4vw, 20px) 0;
 }
 
 .current-temp {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 6px; /* Reduced gap */
+  gap: clamp(4px, 1.5vw, 6px);
 }
 
 .temp-value {
-  font-size: 3.5rem; /* Reduced from 4.5rem */
+  font-size: clamp(2.8rem, 10vw, 3.5rem);
   font-weight: 300;
   line-height: 1;
   color: #1a1a1a;
 }
 
 .temp-unit {
-  font-size: 1.5rem; /* Reduced from 2rem */
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   opacity: 0.8;
   color: #1a1a1a;
 }
 
 .feels-like {
   opacity: 0.8;
-  font-size: 1rem; /* Smaller font */
-  margin-top: 6px; /* Reduced margin */
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  margin-top: 6px;
   color: #1a1a1a;
   font-weight: 500;
 }
 
-/* COMPACT WEATHER STATS LAYOUT */
+/* ADAPTIVE WEATHER STATS LAYOUT */
 .weather-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px; /* Tight gap */
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  gap: clamp(6px, 2vw, 8px);
   margin-top: 20px;
+}
+
+@media (min-width: 480px) {
+  .weather-stats {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+  }
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px; /* Tight gap */
-  padding: 12px 6px; /* Compact padding */
+  gap: 4px;
+  padding: clamp(10px, 2.5vw, 12px) clamp(4px, 1.5vw, 6px);
   background: rgba(255,255,255,0.4);
-  border-radius: 14px; /* Smaller radius */
+  border-radius: clamp(12px, 3vw, 14px);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   text-align: center;
-  min-height: 70px; /* Reduced height */
+  min-height: clamp(60px, 15vw, 70px);
   justify-content: center;
 }
 
@@ -560,7 +593,7 @@ body {
 }
 
 .stat-icon {
-  font-size: 1.4rem; /* Smaller icons */
+  font-size: clamp(1.2rem, 4vw, 1.4rem);
   margin-bottom: 2px;
 }
 
@@ -573,7 +606,7 @@ body {
 }
 
 .stat-value {
-  font-size: 0.85rem; /* Smaller font */
+  font-size: clamp(0.75rem, 2.5vw, 0.85rem);
   font-weight: 700;
   color: #1a1a1a;
   line-height: 1.1;
@@ -582,7 +615,7 @@ body {
 }
 
 .stat-label {
-  font-size: 0.7rem; /* Smaller label */
+  font-size: clamp(0.65rem, 2vw, 0.7rem);
   opacity: 0.8;
   color: #1a1a1a;
   font-weight: 500;
@@ -591,41 +624,35 @@ body {
   line-height: 1.1;
 }
 
-/* Specific compact styling for pressure */
-.stat-item:last-child .stat-value {
-  font-size: 0.8rem;
-  word-break: keep-all;
-}
-
 /* -------------------------------------------------
-   WELCOME MESSAGE - COMPACT
+   WELCOME MESSAGE - RESPONSIVE
 ------------------------------------------------- */
 .welcome-message {
-  margin-top: 30px; /* Reduced margin */
-  padding: 24px; /* Reduced padding */
+  margin-top: clamp(20px, 5vw, 30px);
+  padding: clamp(16px, 4vw, 24px);
   background: rgba(255,255,255,0.3);
-  border-radius: 20px; /* Smaller radius */
+  border-radius: clamp(16px, 4vw, 20px);
   backdrop-filter: blur(10px);
   animation: fadeIn 1s ease-out;
   color: #1a1a1a;
 }
 
 .welcome-icon {
-  font-size: 3rem; /* Smaller icon */
-  margin-bottom: 12px; /* Reduced margin */
+  font-size: clamp(2.5rem, 8vw, 3rem);
+  margin-bottom: clamp(8px, 2.5vw, 12px);
   animation: bounce 2s ease-in-out infinite;
 }
 
 .welcome-message h3 {
-  font-size: 1.3rem; /* Smaller font */
-  margin-bottom: 6px; /* Reduced margin */
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  margin-bottom: 6px;
   color: #1a1a1a;
 }
 
 .welcome-message p {
   opacity: 0.8;
   color: #1a1a1a;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 /* -------------------------------------------------
@@ -688,8 +715,8 @@ body {
 /* Mode Toggle Button */
 .mode-toggle {
   position: relative;
-  width: 50px; /* Smaller toggle */
-  height: 28px;
+  width: clamp(44px, 12vw, 50px);
+  height: clamp(24px, 7vw, 28px);
   background: rgba(0,0,0,0.3);
   border-radius: 50px;
   border: none;
@@ -698,10 +725,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem; /* Smaller font */
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
   color: white;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
 }
 
 .app-container.dark .mode-toggle {
@@ -709,7 +737,7 @@ body {
 }
 
 .toggle-icon {
-  font-size: 1rem; /* Smaller icon */
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 /* -------------------------------------------------
@@ -728,73 +756,80 @@ body {
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
 }
 
 /* -------------------------------------------------
-   RESPONSIVE DESIGN
+   EXTREME MOBILE OPTIMIZATIONS
 ------------------------------------------------- */
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .app-container {
-    width: calc(100% - 16px);
-    padding: 20px 16px;
-    border-radius: 20px;
-    max-width: none;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .search-form {
-    flex-direction: column;
-  }
-
-  .btn-outline {
-    min-width: auto;
-    width: 100%;
+    width: calc(100% - 12px);
+    padding: 14px 12px;
+    border-radius: 14px;
   }
 
   .weather-stats {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr; /* Single column on very small screens */
     gap: 6px;
   }
 
-  .temp-value {
-    font-size: 3rem;
+  .weather-header {
+    gap: 8px;
   }
 
-  .weather-icon {
+  .temp-value {
     font-size: 2.5rem;
   }
 
+  .weather-icon {
+    font-size: 2.2rem;
+  }
+
   .stat-item {
-    min-height: 65px;
-    padding: 10px 4px;
-  }
-
-  .stat-value {
-    font-size: 0.8rem;
-  }
-
-  .stat-label {
-    font-size: 0.65rem;
+    min-height: 55px;
+    padding: 8px 4px;
   }
 }
 
-@media (max-width: 360px) {
-  .weather-stats {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 320px) {
+  .app-container {
+    width: calc(100% - 8px);
+    padding: 12px 10px;
   }
-  
-  .weather-header {
-    flex-direction: column;
-    text-align: center;
+
+  .title {
+    font-size: 1.4rem;
   }
-  
-  .weather-icon {
-    margin-left: 0;
-    margin-top: 10px;
+
+  .weather-title {
+    font-size: 1.1rem;
+  }
+
+  .temp-value {
+    font-size: 2.2rem;
+  }
+}
+
+/* Landscape Mode Optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 20px auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .weather-card {
+    margin-top: 12px;
+    padding: 16px;
+  }
+
+  .temperature-section {
+    margin: 12px 0;
   }
 }
 
@@ -803,16 +838,16 @@ body {
   background: rgba(255, 107, 107, 0.3);
   border: 1px solid rgba(255, 107, 107, 0.5);
   color: #d63031;
-  padding: 12px 16px; /* Reduced padding */
-  border-radius: 14px; /* Smaller radius */
-  margin: 12px 0; /* Reduced margin */
+  padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 16px);
+  border-radius: clamp(12px, 3vw, 14px);
+  margin: clamp(10px, 2.5vw, 12px) 0;
   animation: shake 0.5s ease;
   display: flex;
   align-items: center;
-  gap: 10px; /* Reduced gap */
+  gap: clamp(8px, 2vw, 10px);
   backdrop-filter: blur(10px);
   font-weight: 600;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .app-container.dark .error-message {
@@ -821,11 +856,33 @@ body {
 }
 
 .error-icon {
-  font-size: 1rem; /* Smaller icon */
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
+}
+
+/* Prevent zoom on iOS input focus */
+@media (max-width: 480px) {
+  input, select, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn-outline:hover,
+  .history-chip:hover,
+  .stat-item:hover {
+    transform: none;
+  }
+
+  .btn-outline:active,
+  .history-chip:active,
+  .stat-item:active {
+    transform: scale(0.98);
+  }
 }
